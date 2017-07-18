@@ -14,7 +14,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return Menu::all();
+        return [
+            'data' => Menu::all()
+        ];
     }
 
     /**
