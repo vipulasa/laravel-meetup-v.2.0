@@ -91,6 +91,8 @@ class MenuController extends Controller
 
     public function products($menu_id)
     {
-        return (new Menu)->find($menu_id)->products;
+        return [
+            'data' => (new Menu)->find($menu_id)->products
+        ];
     }
 }
