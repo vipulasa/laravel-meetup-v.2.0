@@ -10,11 +10,11 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index()
     {
-        //
+        return Menu::all();
     }
 
     /**
@@ -35,7 +35,9 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+        'title' => 'required'
+    ]);
     }
 
     /**
@@ -46,7 +48,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+
     }
 
     /**
@@ -69,7 +71,9 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
     }
 
     /**
@@ -81,5 +85,10 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         //
+    }
+
+    public function products($menu_id)
+    {
+        return (new Menu)->find($menu_id)->products;
     }
 }

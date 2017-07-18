@@ -35,7 +35,11 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product_id' => 'required|exists,products:id',
+            'user_id' => 'required|exists,users:id',
+            'qty' => 'required'
+        ]);
     }
 
     /**
@@ -69,7 +73,11 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        $this->validate($request, [
+            'product_id' => 'required|exists,products:id',
+            'user_id' => 'required|exists,users:id',
+            'qty' => 'required'
+        ]);
     }
 
     /**

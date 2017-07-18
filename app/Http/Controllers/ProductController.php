@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::all();
     }
 
     /**
@@ -35,7 +35,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'menu_id' => 'required|exists,menus:id',
+            'price' => 'required',
+            'image' => 'required'
+        ]);
     }
 
     /**
@@ -69,7 +74,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'menu_id' => 'required|exists,menus:id',
+            'price' => 'required',
+            'image' => 'required'
+        ]);
     }
 
     /**
