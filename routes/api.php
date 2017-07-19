@@ -18,13 +18,13 @@ use Illuminate\Http\Request;
 //});
 
 
-Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
+Route::resource('users', 'UserController');
 
-Route::get('menu', ['as' => 'menu.index', 'uses' => 'MenuController@index']);
+Route::resource('menus', 'MenuController');
 
-Route::get('menu/{menu_id}/product', ['as' => 'menu.index', 'uses' => 'MenuController@products']);
+Route::get('menus/{menu_id}/product', ['as' => 'menu.index', 'uses' => 'MenuController@products']);
 
-Route::get('product', ['as' => 'product.index', 'uses' => 'ProductController@index']);
+Route::resource('products', 'ProductController');
 
-Route::get('cart', ['as' => 'cart.index', 'uses' => 'CartController@index']);
+Route::resource('carts', 'CartController');
 

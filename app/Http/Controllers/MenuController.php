@@ -50,7 +50,9 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-
+        return [
+            'data' => $menu
+        ];
     }
 
     /**
