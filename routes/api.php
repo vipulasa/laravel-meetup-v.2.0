@@ -22,7 +22,7 @@ Route::resource('users', 'UserController');
 
 Route::resource('menus', 'MenuController');
 
-Route::get('menus/{menu_id}/product', ['as' => 'menu.index', 'uses' => 'MenuController@products']);
+Route::get('menus/{menu_id}/products', ['as' => 'menu.index', 'uses' => 'MenuController@products']);
 
 Route::resource('products', 'ProductController');
 
