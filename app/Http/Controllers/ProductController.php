@@ -52,9 +52,9 @@ class ProductController extends Controller
             ];
         }
 
-        return [
+        return response([
             'data' => (new Product())->create($request->all())
-        ];
+        ], 201);
     }
 
     /**
@@ -65,9 +65,15 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return [
+
+        return response([
             'data' => $product
-        ];
+        ], 200);
+//
+//        return response([
+//            'status' => true,
+//            'data' => $product
+//        ]);
     }
 
     /**
@@ -103,9 +109,9 @@ class ProductController extends Controller
             ];
         }
 
-        return [
+        return response([
             'data' => $product->update($request->all())
-        ];
+        ], 201);
     }
 
     /**
