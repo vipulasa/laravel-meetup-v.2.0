@@ -37,9 +37,15 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
+
+        if($validator->fails()){
+            return [
+                'errors' => $validator->messages()
+            ];
+        }
 
         return [
             'data' => (new Menu())->create($request->all())
@@ -79,9 +85,15 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'title' => 'required'
         ]);
+
+        if($validator->fails()){
+            return [
+                'errors' => $validator->messages()
+            ];
+        }
 
         return [
             'data' => $menu->update($request->all())

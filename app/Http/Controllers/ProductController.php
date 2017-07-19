@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -37,12 +38,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'menu_id' => 'required|exists,menus:id',
+            'menu_id' => 'required|exists:menus,id',
             'price' => 'required',
             'image' => 'required'
         ]);
+
+        if($validator->fails()){
+            return [
+                'errors' => $validator->messages()
+            ];
+        }
 
         return [
             'data' => (new Product())->create($request->all())
@@ -82,12 +90,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'menu_id' => 'required|exists,menus:id',
+            'menu_id' => 'required|exists:menus,id',
             'price' => 'required',
             'image' => 'required'
         ]);
+
+        if($validator->fails()){
+            return [
+                'errors' => $validator->messages()
+            ];
+        }
 
         return [
             'data' => $product->update($request->all())
