@@ -10,7 +10,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index()
     {
@@ -33,7 +33,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function store(Request $request)
     {
@@ -43,13 +43,17 @@ class ProductController extends Controller
             'price' => 'required',
             'image' => 'required'
         ]);
+
+        return [
+            'data' => (new Product())->create($request->all())
+        ];
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function show(Product $product)
     {
@@ -74,7 +78,7 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function update(Request $request, Product $product)
     {
@@ -84,16 +88,22 @@ class ProductController extends Controller
             'price' => 'required',
             'image' => 'required'
         ]);
+
+        return [
+            'data' => $product->update($request->all())
+        ];
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy(Product $product)
     {
-        //
+        return [
+            'data' => $product->delete()
+        ];
     }
 }

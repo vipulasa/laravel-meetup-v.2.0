@@ -32,21 +32,25 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return array
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-        'title' => 'required'
-    ]);
+            'title' => 'required'
+        ]);
+
+        return [
+            'data' => (new Menu())->create($request->all())
+        ];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @param  \App\Menu $menu
+     * @return array
      */
     public function show(Menu $menu)
     {
@@ -58,7 +62,7 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\Menu $menu
      * @return \Illuminate\Http\Response
      */
     public function edit(Menu $menu)
@@ -69,26 +73,32 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Menu $menu
+     * @return array
      */
     public function update(Request $request, Menu $menu)
     {
         $this->validate($request, [
             'title' => 'required'
         ]);
+
+        return [
+            'data' => $menu->update($request->all())
+        ];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Menu  $menu
-     * @return \Illuminate\Http\Response
+     * @param  \App\Menu $menu
+     * @return array
      */
     public function destroy(Menu $menu)
     {
-        //
+        return [
+            'data' => $menu->delete()
+        ];
     }
 
     public function products($menu_id)
